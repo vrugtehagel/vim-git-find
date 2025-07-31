@@ -1,0 +1,49 @@
+*vim-git-find.txt* Simple file navigation for git repositories
+
+====================================================================
+CONTENTS                                        *VimGitFindContents*
+
+    1. Usage .......... |VimGitFindUsage|
+    2. License ........ |VimGitFindLicense|
+    3. Bugs ........... |VimGitFindBugs|
+
+====================================================================
+1. Usage                                           *VimGitFindUsage*
+
+This plugin provides a single new command, `:GF`. It requires a
+single argument; a path to navigate to. The path provided is fuzzily
+matched with the files within the current Git repository. If the
+path is relative, i.e. starts with any amount of `./` or `../`, then
+the subsequent string is fuzzy searched within the relative
+directory rather than the root of the Git repository.
+
+As an example, say we have a git repository containing `foo.txt`,
+`dir/foo.txt`, `dir/bar.txt` and `dir/baz.txt`. If we are currently
+editing `dir/bar.txt`, and type `:GF foot`, then both `foo.txt` and
+`dir/foo.txt` are suggested. If we type `:GF ./foot`, then only
+`dir/foo.txt` is suggested. If we type `../bt`, then both
+`dir/bar.txt` and `dir/baz.txt` are matched. If we search for, say,
+`../../../txt`, nothing is matched; this is because this path
+"leaves" the repository. We can still navigate to it, but there is
+no autocompletion or suggestions.
+
+The plugin matches Git in ignored files; that is, any file matched
+by the `.gitignore` file (if it exists) is excluded from suggested
+files.
+
+Git submodules are not recursively searched; the folders themselves,
+however, can be matched and open in netrw.
+
+====================================================================
+2. License                                       *VimGitFindLicense*
+
+The "VIM Git find" plugin is MIT licensed.
+
+====================================================================
+3. Bugs                                                 *VimGitFind*
+
+For any bug reports or other forms of communication regarding this
+plugin, please file an issue at
+<https://github.com/vrugtehagel/vim-git-find>
+
+====================================================================
