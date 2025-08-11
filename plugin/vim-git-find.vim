@@ -66,13 +66,11 @@ def GotoFile(bang: string, query: string): void
 	endif
 	const dir = expand('%:p:h')
 	var path = paths[0]
-	echo path
 	if StartsWith(path, './') || StartsWith(path, '../')
 		path = dir .. '/' .. path
 	else
 		path = GitRevParse(dir) .. '/' .. path
 	endif
-	echo path
 	execute('edit' .. bang .. ' ' .. path)
 enddef
 
